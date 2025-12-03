@@ -1,0 +1,27 @@
+[project]
+name = "everybody.codes.jay"
+version = "0.1.0"
+dependencies = [
+    "icecream>=2.1.8",
+    "ruff>=0.14.7",
+]
+requires-python = ">=3.12"
+
+[tool.poe.tasks]
+format = "ruff check --select I --select F --fix ./src/"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "tab"
+docstring-code-format = true
+
+[tool.ruff.lint.isort]
+lines-after-imports = 1
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.38.0",
+]
