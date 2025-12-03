@@ -4,6 +4,6 @@
 # Running Examples
 
 ```python
-python -m src.quests.<quest_number>
+python -m everybodycodes <quest_number>
 ```
 
