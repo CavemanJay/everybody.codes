@@ -1,4 +1,0 @@
-{
-  "AkiraVoid.formatWithCLI.command": "uv run poe format",
-  "AkiraVoid.formatWithCLI.directFormat": false
-}
