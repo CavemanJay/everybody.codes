@@ -54,19 +54,20 @@ def print_aligned(matrix):
         print(" ".join(str(val).rjust(col_widths[i]) for i, val in enumerate(row)))
 
 
-def part_one(s: str):
+def dig_blocks(s: str, diagonal_neighbors: bool):
     grid = parse_map(s)
+    neighbor_count = (int(diagonal_neighbors) + 1) * 4
     for layer in itertools.count(2):
         next_grid = [row[:] for row in grid]
         mined = 0
         for r, row in enumerate(grid):
             for c, cell in enumerate(row):
-                neighbors = get_neighbors(r, c, grid)
+                neighbors = get_neighbors(r, c, grid, diagonal_neighbors)
                 if len(neighbors) == 0:
                     continue
-                if len(neighbors) != 4:
+                if len(neighbors) != neighbor_count:
                     continue
-                if sum(1 for x in neighbors if x == layer - 1) < 4:
+                if sum(1 for x in neighbors if x == layer - 1) < neighbor_count:
                     continue
                 next_grid[r][c] = cell + 1
                 mined += 1
@@ -74,31 +75,17 @@ def part_one(s: str):
         if mined == 0 or mined == 1:
             break
     return sum(cell for row in grid for cell in row if cell != -1)
+
+
+def part_one(s):
+    return dig_blocks(s,False)
 
 
 part_two = part_one
 
 
 def part_three(s: str):
-    grid = parse_map(s)
-    for layer in itertools.count(2):
-        next_grid = [row[:] for row in grid]
-        mined = 0
-        for r, row in enumerate(grid):
-            for c, cell in enumerate(row):
-                neighbors = get_neighbors(r, c, grid, True)
-                if len(neighbors) == 0:
-                    continue
-                if len(neighbors) != 8:
-                    continue
-                if sum(1 for x in neighbors if x == layer - 1) < 8:
-                    continue
-                next_grid[r][c] = cell + 1
-                mined += 1
-        grid = next_grid
-        if mined == 0 or mined == 1:
-            break
-    return sum(cell for row in grid for cell in row if cell != -1)
+    return dig_blocks(s,True)
 
 
 ex = """..........
