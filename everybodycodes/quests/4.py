@@ -19,3 +19,4 @@ ex = """3
 8"""
 
 ic(part_one(get_notes(1)))
+ic(part_one(get_notes(2)))
