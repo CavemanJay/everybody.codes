@@ -45,7 +45,6 @@ def part_one(s: str):
                     continue
                 if sum(1 for x in neighbors if x == layer - 1) < 4:
                     continue
-                ic(layer, (r, c), neighbors)
                 next_grid[r][c] = cell + 1
                 mined += 1
         grid = next_grid
@@ -53,6 +52,7 @@ def part_one(s: str):
             break
     return sum(cell for row in grid for cell in row if cell != -1)
 
+part_two = part_one
 
 ex = """..........
 ..###.##..
@@ -63,3 +63,4 @@ ex = """..........
 .........."""
 
 ic(part_one(get_notes(1)))
+ic(part_two(get_notes(2)))
