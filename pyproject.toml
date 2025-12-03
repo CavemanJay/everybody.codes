@@ -1,17 +1,14 @@
 [project]
 name = "everybody.codes.jay"
 version = "0.1.0"
-dependencies = [
-    "icecream>=2.1.8",
-    "ruff>=0.14.7",
-]
+dependencies = ["icecream>=2.1.8", "ruff>=0.14.7"]
 requires-python = ">=3.12"
 
 [tool.poe.tasks]
-format = "ruff check --select I --select F --fix ./src/"
+format = "ruff check --select I --select F --fix ./everybodycodes/"
 
 [tool.ruff]
-line-length = 100
+line-length = 80
 
 [tool.ruff.format]
 quote-style = "single"
@@ -22,6 +19,4 @@ docstring-code-format = true
 lines-after-imports = 1
 
 [dependency-groups]
-dev = [
-    "poethepoet>=0.38.0",
-]
+dev = ["poethepoet>=0.38.0"]
