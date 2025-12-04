@@ -1,5 +1,7 @@
 import inspect
+from itertools import cycle, islice, zip_longest
 import pathlib
+from typing import Iterable, Sequence
 
 
 def get_notes(part: int):
@@ -18,3 +20,17 @@ def get_current_quest(n=2):
         "Couldn't get module name",
     )
     return int(caller_module.__name__.split(".")[-1])
+
+
+def transpose_jagged[T](
+    grid: Sequence[Sequence[T | None]],
+) -> Sequence[Sequence[T | None]]:
+    return list(list(x) for x in zip_longest(*grid, fillvalue=None))
+
+
+def transpose[T](grid: Sequence[Sequence[T]]) -> list[list[T]]:
+    return list(list(x) for x in zip(*grid))
+
+
+def loop[T](i: Iterable[T], n: int):
+    return islice(cycle(i), n)
