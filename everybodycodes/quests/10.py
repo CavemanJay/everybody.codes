@@ -1,6 +1,6 @@
 from enum import IntFlag
 from functools import reduce
-from itertools import accumulate, count, cycle, groupby, islice, permutations
+from itertools import accumulate, count, cycle, groupby, islice, pairwise, permutations
 import itertools
 from math import factorial
 import math
@@ -10,8 +10,12 @@ from icecream import ic
 from ..utils import get_notes, loop, print_aligned, transpose
 
 
-def part_one(s: str):
-    grid = list(list(l) for l in s.splitlines())
+def word_power(word: str):
+    return sum((i * (ord(c) - ord("A") + 1)) for i, c in enumerate(word, 1))
+
+
+def decode(sample: str):
+    grid = list(list(l) for l in sample.splitlines())
     word = ""
     for r in range(2, 2 + 4):
         row = grid[r]
@@ -22,6 +26,21 @@ def part_one(s: str):
                     word += col_char
                     break
     return word
+
+
+def part_one(s: str):
+    return decode(s)
+
+
+def part_two(s: str):
+    grids = []
+    for row in s.split("\n\n"):
+        row_lines = row.splitlines()
+        splits = [(x, x + 8) for x in range(0, len(row) // 8, 9)]
+        for start, stop in splits:
+            grid = [row_lines[i][start:stop] for i in range(len(row_lines))]
+            grids.append("\n".join(grid))
+    return sum(word_power(decode(grid)) for grid in grids)
 
 
 ex1 = """**PCBS**
@@ -35,3 +54,4 @@ SG....MN
 
 # ic(part_one(ex1))
 ic(part_one(get_notes(1)))
+ic(part_two(get_notes(2)))
