@@ -1,9 +1,7 @@
 import itertools
 from pprint import pprint
 import re
-
 from icecream import ic
-
 from ..utils import get_notes
 
 
