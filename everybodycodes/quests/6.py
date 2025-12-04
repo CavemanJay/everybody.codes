@@ -17,9 +17,9 @@ def find_next(lines: list[str], chains: list[list[str]]):
         lines.remove(next_line)
         return [next_line]
 
-    trailing = list(chain[-1] for chain in chains)
+    trailing = (chain[-1] for chain in chains)
     next_lines = list(
-        line for node in trailing for line in lines if line.startswith(node + ":")
+        set(line for node in trailing for line in lines if line.startswith(node + ":"))
     )
     for l in next_lines:
         lines.remove(l)
@@ -67,6 +67,10 @@ def part_two(s: str):
     return "".join(node[0] for node in unique_fruit_chain(s))
 
 
+def part_three(s: str):
+    return part_two(s)
+
+
 ex = """
 RR:A,B,C
 A:D,E
@@ -84,3 +88,4 @@ H:@
 # ic(part_one(ex))
 ic(part_one(get_notes(1)))
 ic(part_two(get_notes(2)))
+ic(part_three(get_notes(3)))
