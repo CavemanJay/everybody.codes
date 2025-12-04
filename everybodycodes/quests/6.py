@@ -63,6 +63,10 @@ def part_one(s: str):
     return "".join(unique_fruit_chain(s))
 
 
+def part_two(s: str):
+    return "".join(node[0] for node in unique_fruit_chain(s))
+
+
 ex = """
 RR:A,B,C
 A:D,E
@@ -79,3 +83,4 @@ H:@
 
 # ic(part_one(ex))
 ic(part_one(get_notes(1)))
+ic(part_two(get_notes(2)))
