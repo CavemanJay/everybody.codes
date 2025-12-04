@@ -1,5 +1,4 @@
 from enum import IntFlag
-import timeit
 from itertools import accumulate, cycle, groupby, islice, permutations
 from math import factorial
 from pprint import pprint

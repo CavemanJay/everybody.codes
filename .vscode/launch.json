@@ -9,7 +9,7 @@
       "type": "debugpy",
       "request": "launch",
       "module": "everybodycodes",
-      "args": ["7"]
+      "args": ["8"]
     }
   ]
 }
