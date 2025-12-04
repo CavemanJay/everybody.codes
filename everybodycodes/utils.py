@@ -34,3 +34,18 @@ def transpose[T](grid: Sequence[Sequence[T]]) -> list[list[T]]:
 
 def loop[T](i: Iterable[T], n: int):
     return islice(cycle(i), n)
+
+
+def print_aligned(table):
+    # Convert all items to strings
+    str_table = [[str(x) for x in row] for row in table]
+
+    # Find max width of each column
+    col_widths = {}
+    for row in str_table:
+        for i, cell in enumerate(row):
+            col_widths[i] = max(col_widths.get(i, 0), len(cell))
+
+    # Print rows aligned
+    for row in str_table:
+        print("  ".join(cell.ljust(col_widths[i]) for i, cell in enumerate(row)))
