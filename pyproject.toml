@@ -8,6 +8,7 @@ dependencies = [
     "line-profiler>=5.0.0",
     "pwntools>=4.15.0",
     "snakeviz>=2.2.2",
+    "plotly>=6.5.0",
 ]
 requires-python = ">=3.12"
 
