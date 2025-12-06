@@ -1,6 +1,7 @@
 import inspect
 from itertools import cycle, islice, zip_longest
 import pathlib
+import sys
 from typing import Iterable, Sequence
 
 
@@ -15,6 +16,8 @@ def throw(msg=""):
 
 
 def get_current_quest(n=2):
+    if sys.argv[0].startswith("everybodycodes.quests"):
+        return int(sys.argv[0].split(".")[-1])
     caller_frame = inspect.stack()[n]
     caller_module = inspect.getmodule(caller_frame[0]) or throw(
         "Couldn't get module name",

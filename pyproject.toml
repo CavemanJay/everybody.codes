@@ -5,6 +5,9 @@ dependencies = [
     "icecream>=2.1.8",
     "py-spy>=0.4.1",
     "ruff>=0.14.7",
+    "line-profiler>=5.0.0",
+    "pwntools>=4.15.0",
+    "snakeviz>=2.2.2",
 ]
 requires-python = ">=3.12"
 
