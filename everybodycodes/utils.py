@@ -52,3 +52,14 @@ def print_aligned(table):
     # Print rows aligned
     for row in str_table:
         print("  ".join(cell.ljust(col_widths[i]) for i, cell in enumerate(row)))
+
+
+def sliding_window[T](iterable: Iterable[T], size: int):
+    it = iter(iterable)
+    window = list(islice(it, size))
+    if len(window) < size:
+        return
+    yield window
+    for x in it:
+        window = window[1:] + [x]
+        yield window

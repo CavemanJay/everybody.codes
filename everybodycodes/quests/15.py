@@ -1,12 +1,14 @@
 from collections import deque
+from itertools import groupby, product
 from typing import Iterable
 
 from icecream import ic
 
-from everybodycodes.utils import get_notes
+from everybodycodes.utils import get_notes, sliding_window
 
 
 Coord = tuple[int, int]
+Target = tuple[Coord, str]
 
 
 def shortest_path_2d(start: Coord, goal: Coord, valid_coords: Iterable[Coord]) -> int:
@@ -43,7 +45,7 @@ def parse(s: str):
 
     queue = deque([((0, start_col), 0)])
     visited: set[Coord] = set([(0, start_col)])
-    targets: set[Coord] = set()
+    targets: set[Target] = set()
 
     while queue:
         (r, c), dist = queue.popleft()
@@ -59,17 +61,40 @@ def parse(s: str):
         ):
             neighbor = (nr, nc)
             val = grid[nr][nc]
-            if val in ".H" and neighbor not in visited:
+            if val not in "#~" and neighbor not in visited:
                 visited.add(neighbor)
                 queue.append((neighbor, dist + 1))
-                if val == "H":
-                    targets.add(neighbor)
+                if val != ".":
+                    targets.add((neighbor, val))
     return (0, start_col), visited, targets
 
 
 def part_one(s: str):
     start, valid, targets = parse(s)
-    return min(shortest_path_2d(start, t, valid) * 2 for t in targets)
+    return min(shortest_path_2d(start, t[0], valid) * 2 for t in targets)
+
+
+def part_two(s: str):
+    start, valid, targets = parse(s)
+    targets_by_type = groupby(sorted(targets, key=lambda t: t[1]), key=lambda t: t[1])
+    groups = list((key, list(val)) for key, val in targets_by_type)
+
+    # Generate all permutations: 1 element from each group
+    lists = [vals for _, vals in groups]
+    combos = list(product(*lists))
+
+    shortest = float("inf")
+    for combo in combos:
+        # combo = ((start, "S"),) + combo + ((start, "E"),)
+        combo = (
+            ((start, "S"),)
+            + (((3, 3), "A"), ((7, 1), "C"), ((6, 8), "B"))
+            + ((start, "E"),)
+        )
+        w = sliding_window(combo, 2)
+        distances = list(shortest_path_2d(s[0], e[0], valid) for s, e in w)
+        shortest = min(shortest, sum(distances) - 2)
+    return shortest
 
 
 ex1 = """#####.#####
@@ -80,4 +105,17 @@ ex1 = """#####.#####
 #H.......H#
 ###########"""
 
-ic(part_one(get_notes(1)))
+ex2 = """##########.##########
+#...................#
+#.###.##.###.##.#.#.#
+#..A#.#..~~~....#A#.#
+#.#...#.~~~~~...#.#.#
+#.#.#.#.~~~~~.#.#.#.#
+#...#.#.B~~~B.#.#...#
+#...#....BBB..#....##
+#C............#....C#
+#####################"""
+
+# ic(part_one(get_notes(1)))
+ic(part_two(ex2))
+# ic(part_two(get_notes(2)))
