@@ -9,6 +9,7 @@ dependencies = [
     "pwntools>=4.15.0",
     "snakeviz>=2.2.2",
     "plotly>=6.5.0",
+    "numpy>=2.4.0",
 ]
 requires-python = ">=3.12"
 
