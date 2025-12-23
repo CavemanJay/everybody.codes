@@ -6,7 +6,8 @@ from typing import Iterable, Sequence
 
 
 def get_notes(part: int):
-    x = pathlib.Path(f"everybodycodes/notes/{get_current_quest()}_{part}.txt")
+    year, quest = get_current_quest()
+    x = pathlib.Path(f"everybodycodes/{year}/notes/{quest}_{part}.txt")
     with open(x.absolute().resolve().as_posix()) as f:
         return f.read()
 
@@ -17,12 +18,14 @@ def throw(msg=""):
 
 def get_current_quest(n=2):
     if sys.argv[0].startswith("everybodycodes.quests"):
-        return int(sys.argv[0].split(".")[-1])
+        quest = int(sys.argv[0].split(".")[-1])
     caller_frame = inspect.stack()[n]
     caller_module = inspect.getmodule(caller_frame[0]) or throw(
         "Couldn't get module name",
     )
-    return int(caller_module.__name__.split(".")[-1])
+    year = sys.argv[-2]
+    quest = int(caller_module.__name__.split(".")[-1])
+    return year, quest
 
 
 def transpose_jagged[T](

@@ -2,7 +2,7 @@ import itertools
 from pprint import pprint
 import re
 from icecream import ic
-from ..utils import get_notes
+from everybodycodes.utils import get_notes
 
 
 def parse_line(line: str):

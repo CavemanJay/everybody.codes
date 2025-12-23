@@ -3,7 +3,7 @@ from collections.abc import Sequence
 
 from icecream import ic
 
-from ..utils import get_notes
+from everybodycodes.utils import get_notes
 
 potion_map = {"A": 0, "B": 1, "C": 3, "D": 5, "x": 0}
 

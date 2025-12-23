@@ -5,7 +5,7 @@ import math
 import time
 from icecream import ic
 from line_profiler import profile
-from ..utils import get_notes
+from everybodycodes.utils import get_notes
 
 coords = tuple[int, int]
 Obj = tuple[coords, str]

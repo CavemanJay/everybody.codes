@@ -9,11 +9,13 @@ from pwn import *
 context.log_level = "debug"
 
 def main():
-    importlib.import_module(f"everybodycodes.quests.{sys.argv[1]}")
+    year = sys.argv[1]
+    quest = sys.argv[2]
+    importlib.import_module(f"everybodycodes.{year}.quests.{quest}")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 3 and sys.argv[2] == "record":
+    if len(sys.argv) == 4 and sys.argv[3] == "record":
         pid = os.getpid()
         print(pid)
         r = remote("localhost", 1337)

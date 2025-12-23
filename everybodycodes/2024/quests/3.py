@@ -4,7 +4,7 @@ import re
 
 from icecream import ic
 
-from ..utils import get_notes
+from everybodycodes.utils import get_notes
 
 
 def parse_map(s: str):

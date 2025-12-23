@@ -7,7 +7,7 @@ import math
 from pprint import pprint
 from typing import Callable
 from icecream import ic
-from ..utils import get_notes, loop, print_aligned, transpose
+from everybodycodes.utils import get_notes, loop, print_aligned, transpose
 
 
 def part_one(s: str):

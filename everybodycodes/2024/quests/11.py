@@ -2,7 +2,7 @@ from collections import defaultdict
 from itertools import islice
 import itertools
 from icecream import ic
-from ..utils import get_notes
+from everybodycodes.utils import get_notes
 
 
 def gens(rules: str, start_gen: list[str]):
