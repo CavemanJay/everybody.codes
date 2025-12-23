@@ -4,6 +4,6 @@
 # Running Examples
 
 ```python
-python -m everybodycodes <quest_number>
+python -m everybodycodes <year> <quest_number>
 ```
 
