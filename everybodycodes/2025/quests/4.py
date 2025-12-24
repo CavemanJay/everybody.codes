@@ -25,6 +25,12 @@ def part_two(s: str):
     return ceil(full_turns / pairwise_ratio_product(nums))
 
 
+def part_three(s: str):
+    nums = [int(x) for gear_pair in s.splitlines() for x in gear_pair.split("|")]
+    pairs = list(pairwise(nums))[::2]
+    return int(reduce(lambda x, y: x * y, (x / y for x, y in pairs)) * 100)
+
+
 ex1 = """128
 64
 32
@@ -37,8 +43,25 @@ ex2 = """102
 35
 13"""
 
+ex3 = """10
+7|14
+8|16
+6"""
+
+ex4 = """5
+5|10
+10|20
+5"""
+
+ex5 = """5
+7|21
+18|36
+27|27
+10|50
+10|50
+11"""
+
 
 ic(part_one(get_notes(1)))
-ic(part_two(ex1))
-ic(part_two(ex2))
 ic(part_two(get_notes(2)))
+ic(part_three(get_notes(3)))
